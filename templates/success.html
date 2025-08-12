@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+     <html lang="en">
+         <head>
+             <title>NOVACAST Employee Registration Form</title>
+             <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> -->
+             
+             <link rel="stylesheet" href="../static/css/style.css">    
+             <!-- <script src="../static/js/script.js" defer></script> -->
+            <style>
+                #message p {
+                    background-color: black;
+                    color: white;
+                    padding:8px;
+                    text-align: left;
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    
+                }
+                .employee-info {
+                    font-size: 18px; /* Change font size */
+                    font-weight: bold; /*Make text bold*/
+                    color: #333; /* Change text color */
+                    margin-top: 20px; /* Add top margin */
+                    margin-bottom: 10px; /* Add bottom margin */
+                }
+                table,th,td{
+                border: 1px solid black;
+                margin-top: -16px;
+                padding: 10px;
+                border-collapse: collapse;
+                text-align: left;
+                table-layout: fixed;
+                height: fit-content;
+                }
+        
+                #generate-pdf {
+                    margin-top: 20px;
+                    padding: 5px 10px;
+                    background-color: #4CAF50; /* Green */
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+                #generate-pdf:hover {
+                    background-color: #45a049; /* Darker green */
+                }
+            </style>
+         </head>
+         
+     <body>
+        
+    <div id="message">
+
+     <form action="/" id="formMain" enctype="multipart/form-data" method="POST">
+        <div class="container">
+            <h1>Submission Successful!</h1>
+            <p style="background-color: white;color: black;">Thank you for submitting your information. Here are the details you provided:</p>
+            <!-- {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+             -->
+            {% if employee %}
+            <p>Personal Details</p>
+            
+            <table style="width:100%">
+            
+                <tr>
+                    <th> First name</th>
+                    <td>{{ employee.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last name</th>
+                    <td>{{ employee.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>{{ employee.date_of_birth }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ employee.gender }}</td>
+                </tr>
+                <tr>
+                    <th>Aadhar Number</th>
+                    <td>{{ employee.aadhar_number }}</td>
+                </tr>
+                <tr>
+                    <th>Marital Status</th>
+                    <td>{{ employee.marital_status }}</td>
+                </tr>
+                <tr>
+                    <th>Primary Phone Number</th>
+                    <td>{{ employee.primary_phone_number }}</td>
+                </tr>
+                
+            </table>
+            <p>Contact Information</p>
+            <table style="width:100%">
+                <tr>
+                    <th>Current Residential Address</th>
+                    <td>{{ employee.current_address }}</td>
+                </tr>
+                <tr>
+                    <th>Permanent Address
+                        (If Different From the Current Address)</th>
+                        <td>{{ employee.permanent_address or 'Not Provided' }}</td>
+                </tr>
+                <tr>
+                    <th>Secondary Phone Number</th>
+                    <td>{{ employee.secondary_phone_number }}</td>
+            
+                </tr>
+                <tr>
+                    <th>Personal Email Address</th>
+                    <td>{{ employee.email }}</td>
+                </tr>
+                <tr>
+                    <th>Emergency Contact Name and Relationship</th>
+                    <td>{{ employee.emergency_contact_name}}</td>
+
+                </tr>
+                <tr>
+                    <th>Emergency Contact Phone Number and Address</th>
+                    <td>{{ employee.emergency_contact_number }}</td>
+                </tr>
+            </table>
+            <p>Employment Details</p>
+            <table style="width:100%;">
+                <tr>
+                    <th>Employment ID or badge number</th>
+                    <td>{{ employee.employment_id }}</td>
+            
+                </tr>
+                <tr>
+                    <th>Job Title</th>
+                    <td>{{ employee.job_title }}</td>
+                </tr>
+                <tr>
+                <th>Department</th>
+                <td>{{ employee.department }}</td>
+                </tr>
+                <tr>
+                    <th>Employment Start Date</th>
+                    <td>{{ employee.employment_start_date }}</td>
+            
+                </tr>
+                <tr>
+                    <th>Employment Status(e.g.,Full-time,Part-time,Temporary,Contract)</th>
+                    <td>{{ employee.employment_status }}</td>
+                </tr>
+                <tr>
+                    <th>Reporting Manager or Supervisor</th>
+                    <td>{{ employee.reporting_manager }}</td>
+            
+                </tr>
+            </table>
+            <p>Banking and Tax</p>
+            <table style="width: 100%;">
+                <tr><th style="padding: 20px;">Bank account information for direct deposit</th>
+                    <td>{{ employee. bank_account}}</td>
+
+                <tr>
+                    <th>Health Insurance Policy Number and Provider</th>
+                    <td>{{ employee.insurance_policy_number }}</td>
+                </tr>
+                <tr>
+                <th>Tax Identification Number(PAN)</th>
+                <td>{{ employee.tax_identification_number }}</td>
+                </tr>
+            </table>
+            <p>Medical Information</p>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Blood Group</th>
+                    <td>{{ employee.blood_group }}</td>
+                </tr>
+                <tr>
+                    <th>Known Allergies</th>
+                    <td>{{ employee.known_allergies }}</td>
+                </tr>
+                <tr>
+                    <th>Special Instructions(If Any)</th>
+                    <td>{{ employee.special_instructions }}</td>
+                </tr>
+            </table>
+            <p>Identification Information</p>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Passport Number</th>
+                    <td>{{ employee.passport_number }}</td>
+                </tr>
+                <tr>
+                    <th>Work Permit or Visa Details</th>
+                    <td>{{ employee.visa_details }}</td>
+                </tr>
+            </table>
+            <p>Consent and Declaration</p>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Do You Confirm The Accuracy Of The Information Provided
+                        And Consent For Your Data To Be Processed In Line
+                        With Data Protection Regulation?</th>
+                    </th>
+                    <td>{{ 'Yes' if employee.consent else 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ employee.date }}</td>
+                </tr>
+                <tr>
+                    <th>Employee Signature</th>
+                    <td></td>
+                </tr>
+            </table>
+            <!-- <button type="submit">Submit</button> -->
+            <button id="generate-pdf" onclick="printPage()">Print</button>
+            {% endif %}
+            </div>    
+    </form>
+    </div>
+    <script>
+        function printPage() {
+            window.print();
+
+        }
+    </script>
+    
+    </body>
+    </html>

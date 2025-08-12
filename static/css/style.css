@@ -1,0 +1,96 @@
+
+h1{
+   text-align: center;
+   margin-top:80px;
+   text-decoration-line: underline;
+}
+
+p{
+   background-color: black;
+   color: white;
+   padding:8px;
+   text-align: left;
+   border: 1px solid black;
+   border-collapse: collapse;
+  
+}
+.special{
+  width: 80%;
+  border: 0ch;
+  padding: 8px;
+ 
+}
+.light{
+    padding-left:20px;
+    padding-right:25px;
+    text-align: center;
+    
+}
+.weight{
+
+   padding-left:30px;
+   padding-right:35px;
+   text-align: center;
+    width: 200px; 
+}
+.basic{ 
+  border: 0ch;
+  width:100%;
+  height:fit-content;
+  font-family: 'Times New Roman', Times, serif;
+  }
+ table,th,td{
+   border: 1px solid black;
+   margin-top: -16px;
+   padding: 10px;
+   border-collapse: collapse;
+   text-align: left;
+   table-layout: fixed;
+   height: fit-content;
+   }
+
+   .normal{
+      padding: 5px;
+      margin-right: 10px;
+      
+   }
+   .button-container{
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+   }
+  .center-button1{
+      padding: 5px 15px;    
+      font-size: 15px; 
+      position: static;
+  }
+  .center-button2{
+   padding: 5px 15px;   
+   font-size: 15px; 
+   margin-left:5px;
+   
+  }
+  /* .success{
+   color: white;
+   background-color: rgb(8, 148, 8);
+  } */
+  
+  .success {
+      color: green;
+  }
+  .error {
+      color: red;
+  }
+  .flashes {
+      list-style-type: none;
+      padding: 0;
+  }
+
+
+  
+      
+ 
+   
+  
+   
+

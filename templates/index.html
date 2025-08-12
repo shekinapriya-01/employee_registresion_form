@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>NOVACAST Employee Registration Form</title>
+
+        <link rel="stylesheet" href="../static/css/style.css">    
+        <!-- <script src="../static/js/script.js" defer></script> -->
+         
+    </head>
+    
+<body>
+    <div id="message">
+
+<h1>Employee Information Form</h1>
+   {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+<div class="table">
+    <form action="/" id="formMain" enctype="multipart/form-data" method="POST" >
+        <div id="response"></div>
+<p>Personal Details</p>
+
+<table style="width:100%">
+   
+    <tr>
+        <th>First name<span style="color: red;">*</span></th>
+        <td><input type="text" name="firstname" id="firstname" placeholder="Enter First name" class="basic" required value="{{ employee.firstname if employee else '' }}"></td>
+    </tr>
+    <tr>
+        <th>Last name<span style="color: red;">*</span></th>
+        <td>
+            <input type="text" name="lastname" id="lastname" placeholder="Enter Last name" class="basic" required  value="{{ employee.lastname if employee else '' }}"></td>
+
+        </td>
+    </tr>
+    <tr>
+        <th>Date of Birth<span style="color: red;">*</span></th>
+        <td><input type="date" name="dateofbirth" id="dateofbirth" class="normal" required  value="{{ employee.date_of_birth if employee else '' }}"></td>
+
+    </tr>
+    <tr>
+        <th>Gender <span style="color: red;">*</span></th>
+        <td>
+           <input type="radio" name="gender" value="Female" {% if employee.gender == 'Female' %}checked{% endif %}>Female
+           <input type="radio" name="gender" value="Male"  {% if employee.gender == 'Male' %}checked{% endif %}>Male
+           <input type="radio" name="gender" value="Not prefer to say" {% if employee.gender == 'Not prefer to say' %}checked{% endif %}>Not prefer to say
+           <input type="radio" name="gender" value="others" {% if employee.gender == 'others' %}checked{% endif %}>others</td>
+        
+    </tr>
+    <tr>
+        <th>Aadhar Number <span style="color: red;">*</span></th>
+        <td><input type="text"
+            maxlength="12" required
+              name="aadharnumber"
+              placeholder="xxxx xxxx xxxx"
+              class="basic" id="aadharnumber"   value="{{ employee.aadhar_number if employee else '' }}"></td>
+
+        </td>
+    </tr>
+    <tr>
+        <th>Marital Status <span style="color: red;">*</span></th>
+        <td> <input type="radio" name="Maritalstatus" value="Single" {% if employee.Maritalstatus == 'Single' %}checked{% endif %}>Single
+            <input type="radio" name="Maritalstatus" value="Married"  {% if employee.Maritalstatus == 'Married' %}checked{% endif %}>Married
+            <input type="radio" name="Maritalstatus" value="Divorced" {% if employee.Maritalstatus == 'Divorced' %}checked{% endif %}>Divorced </td>
+    </tr>
+    <tr>
+        <th>Primary Phone Number <span style="color: red;">*</span></th>
+        <td><input type="text" name="primaryphonenumber" id="primaryphonenumber" placeholder="8888888888" maxlength="10" class="basic" required  value="{{ employee.primary_phone_number if employee else '' }}"></td>
+
+    </tr>
+    
+</table>
+<p>Contact Information</p>
+<table style="width:100%">
+    <tr>
+        <th>Current Residential Address <span style="color: red;">*</span></th>
+        <td><textarea rows="3" cols="10" id="currentaddress" name="currentaddress" class="basic" required>{{ employee.currentaddress or '' }}</textarea></td>
+    </tr>
+    <tr>
+        <th>Permanent Address
+            (If Different From the Current Address)</th>
+            <td><textarea rows="3" cols="10" name="permanentaddress" id="permanentaddress" class="basic">{{ employee.permanentaddress or '' }}</textarea></td>
+    </tr>
+    <tr>
+        <th>Secondary Phone Number <span style="color: red;">*</span></th>
+        <td><input type="text" name="secondary_phone_number" id="secondary_phone_number" placeholder="8888888888" class="basic" maxlength="10" required   value="{{ employee.secondary_phone_number if employee else '' }}"></td>
+
+    </tr>
+    <tr>
+        <th>Personal Email Address <span style="color: red;">*</span></th>
+        <td>
+        <input type="email" name="email" id="email" placeholder="Example@gmail.com" class="basic" required  value="{{ employee.email if employee else '' }}"></td>
+
+    </tr>
+    <tr>
+        <th>Emergency Contact Name and Relationship <span style="color: red;">*</span></th>
+        <td><input type="text" placeholder="Contact Name and Relationship" id="emergencycontactname" name="emergencycontactname" class="basic" required   value="{{ employee.emergencycontactname if employee else '' }}"></td>
+
+        </td>
+    </tr>
+    <tr>
+        <th>Emergency Contact Phone Number and Address <span style="color: red;">*</span></th>
+        <td><textarea rows="5" cols="10" class="basic" name="emergencycontactnumber" id="emergencycontactnumber" required>  {{ employee.emergencycontactnumber or '' }}</textarea></td>
+
+    </tr>
+</table>
+<p>Employment Details</p>
+<table style="width:100%;">
+    <tr>
+        <th>Employment ID or badge number  <span style="color: red;">*</span></th>
+
+        <td><input type="text"  placeholder="ID Number" id="employmentid"  name="employmentid" class="basic" required   value="{{ employee.employmentid if employee else '' }}"></td>
+
+
+    </tr>
+    <tr>
+        <th>Job Title   <span style="color: red;">*</span></th>
+
+    <td><input type="text" class="basic" name="jobtitle" id="jobtitle" placeholder="Jobtitle" required    value="{{ employee.jobtitle if employee else '' }}"></td>
+
+
+    </tr>
+    <tr>
+       <th>Department    <span style="color: red;">*</span></th>
+
+       <td><input type="text" class="basic" name="department" id="department" placeholder="Department" required     value="{{ employee.department if employee else '' }}"></td>
+
+
+    </tr>
+    <tr>
+        <th>Employment Start Date   <span style="color: red;">*</span></th>
+
+        <td><input type="date" name="employmentstartdate" id="employmentstartdate" class="normal"  required  value="{{ employee.employmentstartdate if employee else '' }}"></td>
+
+
+    </tr>
+    <tr>
+        <th>Employment Status(e.g.,Full-time,Part-time,Temporary,Contract)    <span style="color: red;">*</span></th>
+
+        <td>
+            <select name="employmentstatus" class="light">
+            <option value="Full-time" {% if employee.employmentstatus == 'Full-time' %}selected{% endif %}>Full-time</option>
+            <option value="Part-time" {% if employee.employmentstatus == 'Part-time' %}selected{% endif %}>Part-time</option>
+            <option value="Temporary" {% if employee.employmentstatus == 'Temporary' %}selected{% endif %}>Temporary</option>
+            <option value="Contract" {% if employee.employmentstatus == 'Contract' %}selected{% endif %}>Contract</option>
+        </select></td>
+    </tr>
+    <tr>
+        <th>Reporting Manager or Supervisor</th>
+        <td><input type="text" name="reportingmanager" placeholder="Reportingmanager" class="basic"  value="{{ employee.reportingmanager if employee else '' }}"></td>
+
+    </tr>
+</table>
+<p>Banking and Tax</p>
+<table style="width: 100%;">
+    <tr><th style="padding: 20px;">Bank account information for direct deposit  <span style="color: red;">*</span></th>
+     <td><input type="text" name="bankaccount" id="bankaccount" placeholder="Bank Account Information" class="basic" required  value="{{ employee.bankaccount if employee else '' }}"></td></tr>
+
+    <tr>
+        <th>Health Insurance Policy Number and Provider   <span style="color: red;">*</span></th>
+        <td><textarea rows="3" cols="10" name="insurancepolicynumber" id="insurancepolicynumber" class="basic" required>{{ employee.insurancepolicynumber or '' }}</textarea></td>
+    </tr>
+    <tr>
+       <th>Tax Identification Number(PAN) <span style="color: red;">*</span></th> 
+       <td><input type="text"  name="taxidentificationnumber" id="taxidentificationnumber" placeholder="Pan Number" maxlength="10" class="basic" required   value="{{ employee.taxidentificationnumber if employee else '' }}"></td>
+
+
+    </tr>
+</table>
+<p>Medical Information</p>
+<table style="width: 100%;">
+    <tr>
+        <th>Blood Group    <span style="color: red;">*</span></th>
+        <td><select name="bloodgroup" class="light">
+            <option value="A+" {% if employee.bloodgroup == 'A+' %}selected{% endif %}>A+</option>
+            <option value="A-" {% if employee.bloodgroup == 'A-' %}selected{% endif %}>A-</option>
+            <option value="B+" {% if employee.bloodgroup == 'B+' %}selected{% endif %}>B+</option>
+            <option value="B-" {% if employee.bloodgroup == 'B-' %}selected{% endif %}>B-</option>
+            <option value="O+" {% if employee.bloodgroup == 'O+' %}selected{% endif %}>O+</option>
+            <option value="O-" {% if employee.bloodgroup == ' O-' %}selected{% endif %}>O-</option>
+            <option value="AB+" {% if employee.bloodgroup == 'AB+' %}selected{% endif %}>AB+</option>
+            <option value="AB-" {% if employee.bloodgroup == 'AB-' %}selected{% endif %}>AB-</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Known Allergies</th>
+        <td><textarea rows="2" cols="10" name="knownallergies" id="knownallergies" class="basic">{{ employee.knownallergies or '' }}</textarea></td>
+    </tr>
+    <tr>
+        <th>Special Instructions(If Any)</th>
+        <td><input type="text" name="specialinstructions" id="specialinstructions" class="basic" value="{{ employee.specialinstructions if employee else '' }}"></td>
+    </tr>
+</table>
+<p>Identification Information</p>
+<table style="width: 100%;">
+    <tr>
+        <th>Passport Number  <span style="color: red;">*</span></th>
+        <td><input type="text"  name="passportnumber" id="passportnumber" placeholder="Passport Number"  class="basic" required  value="{{ employee.passportnumber if employee else '' }}"></td>
+    </tr>
+    <tr>
+        <th>Work Permit or Visa Details   <span style="color: red;">*</span></th>
+        <td><input type="text" name="visadetails" id="visadetails" placeholder="Visa Details" class="basic" required   value="{{ employee.visadetails if employee else '' }}"></td>
+
+    </tr>
+</table>
+<p>Consent and Declaration</p>
+<table style="width: 100%;">
+    <tr>
+        <th>Do You Confirm The Accuracy Of The Information Provided
+            And Consent For Your Data To Be Processed In Line
+             With Data Protection Regulation?  <span style="color: red;">*</span></th>
+
+        </th>
+       
+           <td> <input type="radio" name="consent" value="1" {% if employee.consent == '1' %}checked{% endif %}>YES
+                <input type="radio" name="consent" value="0" id="cancelRadio" {% if employee.consent == '0' %}checked{% endif %}>NO
+            </td>
+    </tr>
+    <tr>
+        <th>Date <span style="color: red;">*</span></th>
+        <td><input type="date"name="finaldate" class="normal" required  value="{{ employee.finaldate if employee else '' }}"></td>
+
+
+    </tr>
+    <tr>
+        <th>Employee Signature</th>
+        <td></td>
+    </tr>
+</table>
+</div>
+<br>
+<div class="button-container">
+    <button type="submit" onClick="confSubmit(this.form);" value="Submit Form" id="submitBtn" class="center-button1">Submit</button>
+    <button type="reset" onClick="confCancel();" value="Cancel Form" id="cancelBtn" class="center-button2" >Cancel</button>
+</div>
+</form>
+</div>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="../static/js/script.js"></script>
+</div>
+</body>
+</html>
